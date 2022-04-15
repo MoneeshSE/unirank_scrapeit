@@ -213,6 +213,7 @@ def scraper():
                 list(map(dynamiclink, names))
 
                 if counties:
+                    filename.append(soup.find('h1').text.replace('Universities in ', '').replace('the ', '').replace('Top ', '').strip())
                     with concurrent.futures.ThreadPoolExecutor() as ex:
                         o = ex.map(country_scraper, counties)
                 else:
@@ -221,8 +222,9 @@ def scraper():
             def country_scraper(link):
                 response = requests.get(link)
                 soup = BeautifulSoup(response.content, 'lxml')
-                filename.append(
-                    soup.find('h1').text.replace('Universities in ', '').replace('the ', '').replace('Top ', '').strip())
+                if not filename:
+                    filename.append(
+                        soup.find('h1').text.replace('Universities in ', '').replace('the ', '').replace('Top ', '').strip())
                 table = soup.find_all('td', valign="top")
                 states = []
                 for i in table:
