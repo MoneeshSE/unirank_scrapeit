@@ -248,7 +248,11 @@ def scraper():
             #     univ_detailed_scraper(i)
             # with concurrent.futures.ThreadPoolExecutor() as ex:
             #     op = ex.map(univ_detailed_scraper, list(list_scraper()))
-            continent_scraper(url)
+            try:
+                continent_scraper(url)
+            except Exception as e:
+                print(e)
+                pass
 
             with concurrent.futures.ThreadPoolExecutor() as ex:
                 op = ex.map(univ_detailed_scraper, univ_list)
