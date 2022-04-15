@@ -20,6 +20,8 @@ st = time.perf_counter()
 def scraper():
     if request.method == 'POST':
         url = request.form.get("url")
+        if 'https://www.4icu.org/' not in url:
+            return render_template("base.html", item='Invalid URL')
 
         schema = OrderedDict(
             {'University Name': '', 'University Regional Name': '', 'Acronym': '', 'Founded': '', 'Country Rank': '',

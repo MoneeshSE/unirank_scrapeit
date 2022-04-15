@@ -45,15 +45,13 @@
 			<br><h1><b>Scrape IT</b></h1><br><br>
 			<form method="post" action="/" name="myform" enctype="multipart/form-data">
 				<input type="text" name="url" required placeholder="Enter UniRank Continent or Country or State url" size="35">
-<!--				<select name="category" required>-->
-<!--					<option value="">Select Category</option>-->
-<!--					<option value="central">Central University</option>-->
-<!--					<option value="state">State University</option>-->
-<!--					<option value="deemed">Deemed-to-be University</option>-->
-<!--				</select>-->
+
 				<br><br><br>
+				{% if item|length > 1 %}
+					<label id="msg" msg="{{ item }}" style="display: none;"></label>
+				{% endif %}
 				<input type="submit" onclick="setTimeout(submit_form, 2000)"><br>
-				<h3 style="color:red;">{{ item }}</h3>
+
 			</form>
 		</div>
 	</div>
@@ -64,7 +62,8 @@
 	}
 </script>
 <script>
-
+      var msg = document.getElementById("msg").getAttribute("msg");
+      alert(msg);
 </script>
 </body>
 </html>
